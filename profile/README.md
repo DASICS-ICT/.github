@@ -5,12 +5,14 @@
 
 
 ### 现有仓库介绍
-* 我们实现了对RISC-V架构Linux内核的修改，
+* 我们实现了对RISC-V架构Linux内核的修改，以支持DASICS相关安全处理机制，主要修改在如下几个仓库：
+  * [riscv-linux](https://github.com/DASICS-ICT/riscv-linux)
+  * [riscv-pk]()
+  * [riscv-rootfs]()
 
-* 我们实现了QEMU的DASICS版本，
+* 我们实现了[QEMU的DASICS版本](https://gitee.com/dasics/nut-shell-dasics)
 
-* 我们实现了在[NutShell](http://https://github.com/OSCPU/NutShell)上的硬件原型,并成功在FPGA上启动Linux并进行简单的安全测试。对应仓库可以在[这里](https://gitee.com/dasics/nut-shell-dasics)找到
-
+* 我们在开源的RISC-V处理器[NutShell](http://https://github.com/OSCPU/NutShell)上实现了DASICS的硬件原型,并成功在FPGA上启动Linux并进行简单的安全测试。对应仓库可以在[这里](https://gitee.com/dasics/nut-shell-dasics)找到
 
 ### 联系
 邮箱: TODO（dasics mail list）
