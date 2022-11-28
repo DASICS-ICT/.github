@@ -1,7 +1,7 @@
 ### DASICS介绍
 * DASICS(Dynamic in-Address-Space Isolation by Code Segments)是一种安全处理器设计方案，通过对不同代码片段访问的内存地址空间进行隔离并设置各自的访存权限，从而实现对非预期的越界访存和跳转的防护。这类越界访存可能来自于包括第三方恶意代码, 软件bug, 利用猜测执行的（如Spectre）漏洞在内的各种情况。
 
-* 可以访问[网页版用户手册](https://roxanneucas2016.gitee.io/dasics_blog/2022/01/13/dasics-manual/)查看DASICS的使用说明，或者下载pdf版本的[用户手册](https://gitee.com/dasics/dasics-doc)
+* 可以访问下载pdf版本的[用户手册](https://gitee.com/dasics/dasics-doc)
 
 ### 现有仓库介绍
 * 我们实现了对RISC-V架构Linux内核的修改，以支持DASICS相关安全处理机制，主要修改在如下几个仓库：
