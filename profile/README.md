@@ -36,7 +36,7 @@ test
 ```
 
 
-* 下面详细说明了[如何在qemu模拟器上](#qemu)跑支持DASICS功能的linux以及上述测试，以及[如何在FPGA上](#zynq)使用支持DASICS功能的NutShell处理器核运行linux以及测试
+* 下面详细说明了[如何在qemu模拟器上](#qemu) 跑支持DASICS功能的linux以及上述测试，以及[如何在FPGA上](#pynq)使用支持DASICS功能的NutShell处理器核运行linux以及测试
 
 # 三、使用教程
 
@@ -152,11 +152,11 @@ sh root/scripts/run-dasics-test.sh
 
 ![](../qemu-linux.gif)
 
-<h3 id=zynq ></h3>
+<h3 id==pynq ></h3>
 
-## 3.2 NutShell-DASICS PYNQ-Z2启动教程
+## 3.2 NutShell-DASICS PYNQ-Z2 FPGA启动教程
 
-同样如果不行进行下述步骤，可以使用我们release里给出的[dasics-zynq包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-zynq.tar.gz)，里面包含准备好的BOOT.BIN和RV_BOOT.bin，可以直接跳转到[上板步骤](#fpga-onboard)
+同样如果不行进行下述步骤，可以使用我们release里给出的[dasics-pynq包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-pynq.tar.gz)，里面包含准备好的BOOT.BIN和RV_BOOT.bin，可以直接跳转到[上板步骤](#fpga-onboard)
 
 ### 3.2.1 准备工作
 
@@ -168,7 +168,7 @@ sh root/scripts/run-dasics-test.sh
 
 * 在 [PYNQ-Z2 页面](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)上下载 PYNQ-Z2 Board File，并将其加入Vivado安装目录中的Vivado/2019.2/data/boards/board_files中
 
-### 3.2.2 制作ZYNQ板的内存镜像
+### 3.2.2 制作PYNQ板的内存镜像
 
 这一步基本和qemu中类似，因此就简述一下差别
 
