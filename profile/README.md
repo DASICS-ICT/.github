@@ -26,7 +26,19 @@
 # 使用教程
 
 ## QEMU使用教程
-这个教程主要指导如何在QEMU模拟器上把我们提供的支持DASICS功能的Linux跑起来，并进行一些基础的测试。如果不想进行下面的操作，可以直接使用我们提供的开箱即用的[环境包]，这里面包含了
+
+这个教程主要指导如何在QEMU模拟器上把我们提供的支持DASICS功能的Linux跑起来，并进行一些基础的测试。
+
+### 直接使用Release环境包
+
+* 如果不想进行下面的操作，可以直接使用我们提供的开箱即用的[dasics-qemu 环境包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-qemu.tar.gz)，这里面包含了按照下面的骤准备好的各个文件,但由于可能缺少库文件会导致出错，因此我们还是建议按照下面的步骤准备相关文件.
+
+* 解压后，进入`dasics-qemu目录`，运行如下命令：
+```
+./qemu-system-riscv64 -machine virt -bios none -kernel ~/qemu-test/dasics/bbl -m 1G -nographic -append "console=ttyS0 rw root=/dev/vda" -drive file=../img,format=raw,id=hd0 -device virtio-blk-device,drive=hd0
+```
+
+* 成功运行将会打印出linux启动信息
 
 ### 准备QEMU
 
@@ -42,7 +54,7 @@ cd QEMU-DASICS
 make clean && make
 ```
 
-* 生成`qemu-system-riscv64`在`riscv64-softmmu`目录下,接下来我们需要制作一个virtio盘,在QEMU-DASIC目录下执行下列命令：
+* 生成`qemu-system-riscv64`在`riscv64-softmmu`目录下,接下来我们需要制作一个virtio盘,在`QEMU-DASIC`目录下执行下列命令：
 ```
 ./qemu-img create -f raw img 1G
 mkfs.ext4 img
@@ -55,18 +67,20 @@ sudo mount img tmp_mount/
 
 ### 准备linux bbl
 
-* 首先要确认有riscv编译工具链，如果没有可以从[源码制作](https://github.com/riscv/riscv-tools),也可以使用NutShell原本提供的[预编译包](https://github.com/LvNA-system/labeled-RISC-V/releases/download/v0.1.0/riscv-toolchain-2018.05.24.tar.gz)
+* 首先要确认有riscv编译工具链，如果没有可以从[源码制作](https://github.com/riscv/riscv-tools),注意最好使用11.1.0版本的gcc,也可以使用我们在release中提供的[预编译包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-riscv-toolchain.tar.gz)，下面我们按照预编译包的方式进行讲解：
 
-* 设置好RISCV变量并将工具链添加到环境变量中，假设你的工具链路径为$(TOOL_CHAIN),运行如下命令：
+* 解压`dasics-riscv-toolchain.tar.gz`，在`dasics-riscv-toolchain`目录下有`riscv64-unknown-elf`和`riscv64-unknown-linux-gnu`两个目录
+
+* 设置好`RISCV`变量并将工具链添加到环境变量中，假设你的`dasics-riscv-toolchain`工具链路径为`$(DASICS_TOOL_CHAIN)`,运行如下命令(（建议添加到`~/.bashrc`或者`~/.zshrc`中)：
 ```
-export RISCV=$(TOOL_CHAIN)
-export PATH=$(TOOL_CHAIN)/bin:$PATH
+export RISCV=$(DASICS_TOOL_CHAIN)/riscv64-unknown-linux-gnu
+export PATH=$(DASICS_TOOL_CHAIN)/riscv64-unknown-elf/bin:$PATH
+export PATH=$(DASICS_TOOL_CHAIN)/riscv64-unknown-linux-gnu/bin:$PATH
 ```
 
-* 工具链测试，运行如下命令，如果没有错误提示正常显示gcc信息则说明工具链安装正，我们需要两个工具链，包括`riscv64-unknown-elf-`和`riscv64-unknown-linux-gnu-`
+* 工具链测试，运行如下命令，如果没有错误提示正常显示gcc信息则说明工具链安装正确，我们需要两个工具链，包括`riscv64-unknown-elf-`和`riscv64-unknown-linux-gnu-`，下列命令都应该显示是11.1.0 版本的gcc
 ```
 riscv64-unknown-linux-gnu-gcc -v
-
 riscv64-unknown-elf-gcc -v
 ```
 
@@ -77,42 +91,42 @@ git clone https://github.com/DASICS-ICT/riscv-rootfs.git
 git clone https://github.com/DASICS-ICT/riscv-pk.git
 ```
 
-* 设置好RISCV_ROOTFS_HOME,为riscv-rootfs的路径（建议添加到~/.bashrc或者~/.zshrc中）,假设是$(PATH_TO_YOUR_RISCV_ROOTFS)
+* 设置好`RISCV_ROOTFS_HOME`,为`riscv-rootfs`的路径（建议添加到`~/.bashrc`或者`~/.zshrc`中）,假设是`$(PATH_TO_YOUR_RISCV_ROOTFS)`
 ```
 export RISCV_ROOTFS_HOME=$(PATH_TO_YOUR_RISCV_ROOTFS)
 ```
 
-* riscv-rootfs是制作内存文件系统使用的仓库，这个目录下面apps/busybox是我们需要的一些busybox基本工具，apps/dasics-test是我们dasics测试的build目录。我们在riscv-rootfs目录下运行
+* `riscv-rootfs`是制作内存文件系统使用的仓库，这个目录下面`apps/busybox`是我们需要的一些busybox基本工具，`apps/dasics-test`是我们dasics测试的build目录。我们在`riscv-rootfs`目录下运行
 ```
 make all
 ```
 
-* 成功后，我们已经在riscv-rootfs/rootfsimg目录下创建好了内存文件系统，文件系统描述见riscv-rootfs/rootfsimg/initramfs-dasics.txt文件
+* 成功后，我们已经在`riscv-rootfs/rootfsimg`目录下创建好了内存文件系统，文件系统描述见`riscv-rootfs/rootfsimg/initramfs-dasics.txt`文件
 
-* 接下来我们进入riscv-linux编译linux内核，需要注意的是，如果我们是在QEMU上跑linux，需要进入riscv-linux/arch/riscv/Kconfig, CONFIG_ZYNQ_ONBOARD需要设置为n
+* 接下来我们进入`riscv-linux`编译linux内核，需要注意的是，如果我们是在QEMU上跑linux，需要进入`riscv-linux/arch/riscv/Kconfig`, 在105-108行将`CONFIG_ZYNQ_ONBOARD`设置为`n`
 ```
-//riscv-linux/arch/riscv/Kconfig 105-108
+//riscv-linux/arch/riscv/Kconfig
 config ZYNQ_ONBOARD
 #	   def_bool y	
      def_bool n
 ```
 
-* 修改好后在riscv-linux目录下运行下述命令（qemu_defconfig文件在riscv-linux/arch/riscv/configs下）
+* 修改好后在`riscv-linux`目录下运行下述命令（`qemu_defconfig`文件在`riscv-linux/arch/riscv/configs`下）
 ```
 make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- qemu_defconfig
 ```
 
-* 最后我们进入riscv-pk目录下运行下述命令，之后在riscv-pk/build目录下得到我们的bbl文件，这个文件包含了boot loader、linux kernel以及我们制作的内存文件系统
+* 最后我们进入`riscv-pk`目录下运行下述命令，之后在`riscv-pk/build`目录下得到我们的`bbl`文件，这个文件包含了boot loader、linux kernel以及我们制作的内存文件系统
 
 ### 在QEMU上运行linux bbl
 
-* 回到QEMU-DASICS目录运行下述命令(假设我们上一步中得到的bbl路径为$(PATH_TO_BBL))：
+* 回到`QEMU-DASICS`目录运行下述命令(假设我们上一步中得到的bbl路径为`$(PATH_TO_BBL)`：
 ```
 cd riscv64-softmmu
 ./qemu-system-riscv64 -machine virt -bios none -kernel $(PATH_TO_BBL) -m 1G -nographic -append "console=ttyS0 rw root=/dev/vda" -drive file=../img,format=raw,id=hd0 -device virtio-blk-device,drive=hd0
 ```
 
-* 等待linux启动直到进入shell，/root目录下放置了4个编译好的dasics测试，/root/scripts/run-dasics-test.sh是跑所有测试的脚本，执行如下命令：
+* 等待linux启动直到进入shell，`/root`目录下放置了4个编译好的dasics测试，`/root/scripts/run-dasics-test.sh`是跑所有测试的脚本，执行如下命令：
 ```
 sh root/scripts/run-dasics-test.sh
 ```
@@ -173,4 +187,4 @@ cd fpga && make PRJ=prj BOARD=pynq STANDALONE=true bootgen
 
 * 将BOOT.BIN和RV_BOOT.bin拷贝到SD卡的第一个分区
 
-* 办卡上电之后可以看到linux启动，其余步骤和qemu测试相同
+* 板卡上电之后可以看到linux启动，其余步骤和qemu测试相同
