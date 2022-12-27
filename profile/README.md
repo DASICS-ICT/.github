@@ -150,7 +150,7 @@ sh root/scripts/run-dasics-test.sh
 
 * 可以看到输出的信息中包含了4个测试的打印输出，说明dasics功能正确跑通
 
-![](../qemu-linux.gif)
+![](https://github.com/DASICS-ICT/.github/blob/main/qemu-linux.gif)
 
 <h3 id==pynq ></h3>
 
