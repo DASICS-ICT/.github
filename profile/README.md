@@ -1,4 +1,4 @@
-# DASICS介绍
+# 一、DASICS介绍
 
 * DASICS(Dynamic in-Address-Space Isolation by Code Segments)是一种安全处理器设计方案，通过对不同代码片段访问的内存地址空间进行隔离并设置各自的访存权限，从而实现对非预期的越界访存和跳转的防护。这类越界访存可能来自于包括第三方恶意代码, 软件bug, 利用猜测执行的（如Spectre）漏洞在内的各种情况。
 
@@ -10,7 +10,7 @@
   * Zhao Y Y, Chen M Y, Liu Y H, et al. IMPULP: A Hardware Approach for In-Process Memory Protection via User-Level Partitioning[J]. Journal of Computer Science and Technology, 2020, 35(2): 418-432.
   * [第二届中国峰会上DASICS的报告](https://www.bilibili.com/video/BV1CG41157qu/?spm_id_from=333.337.search-card.all.click)
 
-# 现有仓库介绍
+# 二、现有仓库介绍
 * 我们实现了对RISC-V架构Linux内核的修改，以支持DASICS相关安全处理机制，主要修改在如下几个仓库：
   * [riscv-linux](https://github.com/DASICS-ICT/riscv-linux)
   * [riscv-pk](https://github.com/DASICS-ICT/riscv-pk)
@@ -21,15 +21,32 @@
 * 我们在开源的RISC-V处理器[NutShell](http://https://github.com/OSCPU/NutShell)上实现了DASICS的硬件原型,并成功在FPGA上启动Linux并进行简单的安全测试
   * 支持DASICS功能的NutShell在[这里](https://github.com/DASICS-ICT/NutShell-DASICS)
 
-* 我们实现了基础的DASICS测试，测试代码目录在
+* 我们实现了基础的DASICS测试，测试代码build目录在`riscv-rootfs/apps/dasics-test`，目前有四个基本的测试：
+  * dasics-test-ofb：测试非可信区函数对越界地址进行读/写/跳转
+  * dasics-test-jump：测试可信区、非可信区以及自由跳转区之间的跳转功能
+  * dasics-test-rwx：测试非可信区边界寄存器的分配和设置，以及读/写/执行权限是否能正常限制
+  * dasics-test-free：测试非可信区边界控制寄存器是否能正常释放
+```
+# riscv-rootfs/apps/dasics-test
+test
+├── dasics-test-free.c
+├── dasics-test-jump.c
+├── dasics-test-ofb.c
+└── dasics-test-rwx.c
+```
 
-# 使用教程
 
-## QEMU使用教程
+* 下面详细说明了[如何在qemu模拟器上](#qemu)跑支持DASICS功能的linux以及上述测试，以及[如何在FPGA上](#zynq)使用支持DASICS功能的NutShell处理器核运行linux以及测试
+
+# 三、使用教程
+
+<h3 id=qemu ></h3>
+
+## 3.1 QEMU使用教程
 
 这个教程主要指导如何在QEMU模拟器上把我们提供的支持DASICS功能的Linux跑起来，并进行一些基础的测试。
 
-### 直接使用Release环境包
+### 3.1.1 直接使用Release环境包
 
 * 如果不想进行下面的操作，可以直接使用我们提供的开箱即用的[dasics-qemu 环境包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-qemu.tar.gz)，这里面包含了按照下面的骤准备好的各个文件,但由于可能缺少库文件会导致出错，因此我们还是建议按照下面的步骤准备相关文件.
 
@@ -40,7 +57,7 @@
 
 * 成功运行将会打印出linux启动信息
 
-### 准备QEMU
+### 3.1.2 准备QEMU
 
 * 首先把我们提供的QEMU-DASICS clone到本地
 ``` 
@@ -65,7 +82,7 @@ sudo mount img tmp_mount/
 
 * 到此QEMU的准备完成
 
-### 准备linux bbl
+### 3.1.3 准备linux bbl
 
 * 首先要确认有riscv编译工具链，如果没有可以从[源码制作](https://github.com/riscv/riscv-tools),注意最好使用11.1.0版本的gcc,也可以使用我们在release中提供的[预编译包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-riscv-toolchain.tar.gz)，下面我们按照预编译包的方式进行讲解：
 
@@ -118,7 +135,7 @@ make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- qemu_defconfig
 
 * 最后我们进入`riscv-pk`目录下运行下述命令，之后在`riscv-pk/build`目录下得到我们的`bbl`文件，这个文件包含了boot loader、linux kernel以及我们制作的内存文件系统
 
-### 在QEMU上运行linux bbl
+### 3.1.4 在QEMU上运行linux bbl
 
 * 回到`QEMU-DASICS`目录运行下述命令(假设我们上一步中得到的bbl路径为`$(PATH_TO_BBL)`：
 ```
@@ -133,15 +150,25 @@ sh root/scripts/run-dasics-test.sh
 
 * 可以看到输出的信息中包含了4个测试的打印输出，说明dasics功能正确跑通
 
-## NutShell-DASICS PYNQ-Z2启动教程
+![](../qemu-linux.gif)
 
-### 准备工作
+<h3 id=zynq ></h3>
+
+## 3.2 NutShell-DASICS PYNQ-Z2启动教程
+
+同样如果不行进行下述步骤，可以使用我们release里给出的[dasics-zynq包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-zynq.tar.gz)，里面包含准备好的BOOT.BIN和RV_BOOT.bin，可以直接跳转到[上板步骤](#fpga-onboard)
+
+### 3.2.1 准备工作
+
 * 安装 [mill](https://com-lihaoyi.github.io/mill/mill/Intro_to_Mill.html)
+
 * 确保python在$PATH中
+
 * 安装 [Vivado 2019.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html)
+
 * 在 [PYNQ-Z2 页面](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)上下载 PYNQ-Z2 Board File，并将其加入Vivado安装目录中的Vivado/2019.2/data/boards/board_files中
 
-### 制作ZYNQ板的内存镜像
+### 3.2.2 制作ZYNQ板的内存镜像
 
 这一步基本和qemu中类似，因此就简述一下差别
 
@@ -155,7 +182,7 @@ sh root/scripts/run-dasics-test.sh
 
 * 在riscv-pk中运行`make`，生成的bbl.bin 在riscv-pk/build文件夹下，将bbl.bin改名为RV_BOOT.bin
 
-### 生成verilog
+### 3.2.3 生成verilog
 
 * 获取NutShell-DASICS仓库，进入dev-dasics-ucas-os分支
 ```
@@ -168,7 +195,7 @@ git checkout dev-dasics-ucas-os
 make BOARD=pynq
 ```
 
-### 用vivado工程生成启动镜像
+### 3.2.4 用vivado工程生成启动镜像
 
 * 确保vivado在$PATH中（可能需要source Vivado安装目录下的Vivado/2019.2/settings64.sh）
  
@@ -182,7 +209,10 @@ cd fpga && make PRJ=prj BOARD=pynq STANDALONE=true bootgen
 ```
 * 成功运行后，生成fpga/boot/build/prj-pynq/BOOT.BIN文件
 
-### 上板
+<h3 id=fpga-onboard ></h3>
+
+### 3.2.5 上板
+
 * 准备SD卡，对SD卡进行分区，并对SD卡第一个分区进行格式化
 
 * 将BOOT.BIN和RV_BOOT.bin拷贝到SD卡的第一个分区
