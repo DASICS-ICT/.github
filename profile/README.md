@@ -152,7 +152,7 @@ sh root/scripts/run-dasics-test.sh
 
 ![](https://github.com/DASICS-ICT/.github/blob/main/qemu-linux.gif)
 
-<h3 id==pynq ></h3>
+<h3 id=pynq ></h3>
 
 ## 3.2 NutShell-DASICS PYNQ-Z2 FPGA启动教程
 
