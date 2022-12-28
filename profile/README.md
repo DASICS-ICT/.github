@@ -133,7 +133,10 @@ config ZYNQ_ONBOARD
 make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- qemu_defconfig
 ```
 
-* 最后我们进入`riscv-pk`目录下运行下述命令，之后在`riscv-pk/build`目录下得到我们的`bbl`文件，这个文件包含了boot loader、linux kernel以及我们制作的内存文件系统
+* 最后我们进入`riscv-pk`目录下运行下述命令，成功之后在`riscv-pk/build`目录下得到我们的`bbl`文件，这个文件包含了boot loader、linux kernel以及我们制作的内存文件系统
+```
+make qemu
+```
 
 ### 3.1.4 在QEMU上运行linux bbl
 
@@ -156,7 +159,9 @@ sh root/scripts/run-dasics-test.sh
 
 ## 3.2 NutShell-DASICS PYNQ-Z2 FPGA启动教程
 
-同样如果不行进行下述步骤，可以使用我们release里给出的[dasics-pynq包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-pynq.tar.gz)，里面包含准备好的BOOT.BIN和RV_BOOT.bin，可以直接跳转到[上板步骤](#fpga-onboard)
+这个教程主要指导如何将我们修改的NutShell处理器核以及Linux惊吓放到PYNQ-Z2 FPGA板上跑起来。
+
+同样如果不想进行下述步骤，可以使用我们release里给出的[dasics-pynq包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-pynq.tar.gz)，里面包含准备好的BOOT.BIN和RV_BOOT.bin，可以直接跳转到[上板步骤](#fpga-onboard)
 
 ### 3.2.1 准备工作
 
