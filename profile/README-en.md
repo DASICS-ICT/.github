@@ -4,7 +4,9 @@
 
 * DASICS (Dynamic in-Address-Space Isolation by Code Segments) is a secure processor solution that protects against unintended out-of-bounds accesses and bounces by isolating the memory address spaces accessed by different code segments and setting their respective access rights. Such out-of-bounds accesses can come from a variety of scenarios including third-party malicious code, software bugs, and exploiting guessed execution (e.g., Spectre) vulnerabilities.
 
-* Usage can be accessed by downloading the pdf version of [User Manual](https://github.com/DASICS-ICT/DASICS-DOC)
+* [DASICS White Paper](https://github.com/DASICS-ICT/DASICS-DOC/blob/main/doc/DASICS_white_paper.pdf) is available.
+
+* [DASICS User Manual](https://github.com/DASICS-ICT/DASICS-DOC) is available.
 
 * Related Academic Papers and Materials：
   * Zhao Y Y, Chen M Y, Liu Y H, et al. IMPULP: A Hardware Approach for In-Process Memory Protection via User-Level Partitioning[J]. Journal of Computer Science and Technology, 2020, 35(2): 418-432.
