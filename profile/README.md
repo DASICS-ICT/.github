@@ -28,13 +28,15 @@
   * dasics-test-jump：测试可信区、非可信区以及自由跳转区之间的跳转功能
   * dasics-test-rwx：测试非可信区边界寄存器的分配和设置，以及读/写/执行权限是否能正常限制
   * dasics-test-free：测试非可信区边界控制寄存器是否能正常释放
+  * dasics-test-syscall：测试非可信区write syscall是否能被可信区拦截以及正常代理
 ```
 # riscv-rootfs/apps/dasics-test
 test
 ├── dasics-test-free.c
 ├── dasics-test-jump.c
 ├── dasics-test-ofb.c
-└── dasics-test-rwx.c
+├── dasics-test-rwx.c
+└── dasics-test-syscall.c
 ```
 
 
