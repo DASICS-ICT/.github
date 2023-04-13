@@ -12,7 +12,7 @@
   * Zhao Y Y, Chen M Y, Liu Y H, et al. IMPULP: A Hardware Approach for In-Process Memory Protection via User-Level Partitioning[J]. Journal of Computer Science and Technology, 2020, 35(2): 418-432.
   * [DASICS presentation at the 2nd RISC-V China Summit](https://www.bilibili.com/video/BV1CG41157qu/?spm_id_from=333.337.search-card.all.click)
 
-# 2. Introduction of existing repos
+# 2. Introduction of Existing Repos
 * We implemented modifications to the RISC-V architecture Linux kernel to support DASICS-related security processing mechanisms, mainly in the following repositories:
   * [riscv-linux](https://github.com/DASICS-ICT/riscv-linux)
   * [riscv-pk](https://github.com/DASICS-ICT/riscv-pk)
