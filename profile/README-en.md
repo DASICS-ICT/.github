@@ -27,14 +27,16 @@
   * dasics-test-ofb：Test non-trusted zone functions for read/write/jump to out-of-bounds addresses;
   * dasics-test-jump：Test the jump function between trusted, non-trusted and free jumping zones;
   * dasics-test-rwx：Test the allocation and setting of non-trusted zone boundary registers and whether read/write/execute permissions can be restricted properly;
-  * dasics-test-free：Test that the non-trusted zone boundary control register is released properly.
+  * dasics-test-free：Test that the non-trusted zone boundary control register is released correctly.
+  * * dasics-test-syscall：Test whether write syscall in untrusted zones can be intercepted by trusted zones and proxied correctly.
 ```
 # riscv-rootfs/apps/dasics-test
 test
 ├── dasics-test-free.c
 ├── dasics-test-jump.c
 ├── dasics-test-ofb.c
-└── dasics-test-rwx.c
+├── dasics-test-rwx.c
+└── dasics-test-syscall.c
 ```
 
 
