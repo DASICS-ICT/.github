@@ -86,7 +86,7 @@ sudo mount img tmp_mount/
 
 ### 3.1.3 Prepare Linux BBL
 
-* First make sure there is a riscv compilation toolchain, if not you can get it from [source code production](https://github.com/riscv/riscv-tools). Note that it is best to use version 11.1.0 of gcc, or you can use the [pre-compilation package](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-riscv-toolchain.tar.gz) we provide in the release. We use the pre-compiled package for description:
+* First make sure there is a riscv compilation toolchain, if not you can get it from [source code production](https://github.com/riscv-collab/riscv-gnu-toolchain). Note that it is best to use version 11.1.0 of gcc, or you can use the [pre-compilation package](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-riscv-toolchain.tar.gz) we provide in the release. We use the pre-compiled package for description:
 
 * Extract `dasics-riscv-toolchain.tar.gz`, there are two directories `riscv64-unknown-elf` and `riscv64-unknown-linux-gnu` in the `dasics-riscv-toolchain` directory
 
