@@ -88,7 +88,7 @@ sudo mount img tmp_mount/
 
 ### 3.1.3 准备linux bbl
 
-* 首先要确认有riscv编译工具链，如果没有可以从[源码制作](https://github.com/riscv/riscv-tools),注意最好使用11.1.0版本的gcc,也可以使用我们在release中提供的[预编译包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-riscv-toolchain.tar.gz)，下面我们按照预编译包的方式进行讲解：
+* 首先要确认有riscv编译工具链，如果没有可以从[源码制作](https://github.com/riscv-collab/riscv-gnu-toolchain),注意最好使用11.1.0版本的gcc,也可以使用我们在release中提供的[预编译包](https://github.com/DASICS-ICT/NutShell-DASICS/releases/download/nutshell-dasics-v1.0.0/dasics-riscv-toolchain.tar.gz)，下面我们按照预编译包的方式进行讲解：
 
 * 解压`dasics-riscv-toolchain.tar.gz`，在`dasics-riscv-toolchain`目录下有`riscv64-unknown-elf`和`riscv64-unknown-linux-gnu`两个目录
 
