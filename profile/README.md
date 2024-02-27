@@ -46,6 +46,12 @@ test
 
 <h3 id=qemu ></h3>
 
+参照xs-dasics-v1.0用户手册更新后的dasics-nutshell-v2已经发布。
+
+[dasics-nutshell-v2使用教程](https://github.com/DASICS-ICT/.github/blob/main/profile/dasics-nutshell-v2.md)
+
+本文以下为dasics-nutshell-v1的使用教程。
+
 ## 3.1 QEMU使用教程
 
 这个教程主要指导如何在QEMU模拟器上把我们提供的支持DASICS功能的Linux跑起来，并进行一些基础的测试。
