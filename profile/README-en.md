@@ -46,6 +46,12 @@ test
 
 <h3 id=qemu ></h3>
 
+The dasics-nutshell-v2, which update the dasics-nutshell project to synchronize with the new standard given by xs-dasics-v1.0 user manual, has been released.
+
+[dasics-nutshell-v2 tutorial (Chinese)](https://github.com/DASICS-ICT/.github/blob/main/profile/dasics-nutshell-v2.md)
+
+The texts below are dasics-nutshell-v1 tutorial.
+
 ## 3.1 QEMU Usage Tutorial
 
 This tutorial is a guide on how to get our provided DASICS-enabled Linux up and running on the QEMU emulator and perform some basic tests.
