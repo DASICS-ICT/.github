@@ -19,6 +19,8 @@ NEMU（dasics-nutshell-v2分支，commit d58dd97bdb795c7899e8b65176ab087240bdd3d
 ```
 以上commit位置在对应仓库中均有tag标记，可以辅助查找；如果不追求自行编译，也可以直接使用Nutshell-DASICS内的release发布的即用包。所有仓库放置在同一个目录下。
 
+以上两步也可以使用[dasics-nutshell-env](https://github.com/DASICS-ICT/dasics-nutshell-env)集成环境仓库进行简易部署。
+
 ## 3. 进行仿真/上板
 
 ### 3.1 仿真
