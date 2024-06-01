@@ -66,7 +66,7 @@ make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- xxx_defconfig
 
 在riscv-pk仓库中make，在build文件夹内得到bbl.bin文件。
 
-每次编译riscv-linux时会出现 multiple definition of 'yylloc' 的错误，需要修改riscv-linux/scripts/dtc/dtc-lexer.lex.c的2223行，在YYLTYPE yylloc前加上extern。
+每次编译riscv-linux时会出现 multiple definition of 'yylloc' 的错误，需要修改riscv-linux/scripts/dtc/dtc-lexer.lex.c，在YYLTYPE yylloc前加上extern。
 
 注意！仓库内默认代码为pynq上板时使用，如果仿真使用需要先参照备注进行部分代码修改！
 
