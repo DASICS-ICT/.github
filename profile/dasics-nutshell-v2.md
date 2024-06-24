@@ -86,7 +86,7 @@ NutShell-DASICS/build/emu -i riscv-pk/build/bbl.bin
 
 ### 3.2 上板
 
-使用vivado 2019.1，按照DASICS-ICT组织主页的教程上板；唯一的不同是，不需要再单独修改Kconfig的ZYNQ_ONBOARD，在make linux kernel时使用对应的defconfig即可。
+使用vivado 2019.2，按照DASICS-ICT组织主页的教程上板；唯一的不同是，不需要再单独修改Kconfig的ZYNQ_ONBOARD，在make linux kernel时使用对应的defconfig即可。
 
 ### 备注
 
