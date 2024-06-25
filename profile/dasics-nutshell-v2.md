@@ -9,17 +9,8 @@ git clone git@github.com:OpenXiangShan/riscv-gnu-toolchain.git
 编译riscv64-unknown-linux-gnu与riscv64-unknown-elf工具链作为dasics编译使用的工具链。
 
 ## 2. 准备DASICS-ICT组织的仓库
-以dasics-nutshell-v2.0.0为例：
-```
-riscv-rootfs（xs-dasics-linux分支，commit 777d582153ea0a3f5f45196554d1c1aea7bcf0a7）
-riscv-pk（dasics-nutshell-v2分支，commit c36e95dc491af15665c4dac7e674087d4bd712e4）
-riscv-linux（dasics-nutshell-v2分支，commit d295382cb20211acf1eaf107b9bdc3dc5fdb3d52）
-NutShell-DASICS（dasics-nutshell-v2分支，commit e6b9eae0b9a7cf38ae5dafeb8515df284ab698da，记得更新submodule）
-NEMU（dasics-nutshell-v2分支，commit d58dd97bdb795c7899e8b65176ab087240bdd3d5）
-```
-以上commit位置在对应仓库中均有tag标记，可以辅助查找；如果不追求自行编译，也可以直接使用Nutshell-DASICS内的release发布的即用包。所有仓库放置在同一个目录下。
 
-以上两步也可以使用[dasics-nutshell-env](https://github.com/DASICS-ICT/dasics-nutshell-env)集成环境仓库进行简易部署。
+使用[dasics-nutshell-env](https://github.com/DASICS-ICT/dasics-nutshell-env)集成环境仓库进行简易部署。
 
 ## 3. 进行仿真/上板
 
