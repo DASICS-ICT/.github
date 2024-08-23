@@ -181,7 +181,7 @@ sh root/scripts/run-dasics-test.sh
 
 * 安装 [Vivado 2020.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html)
 
-* 在 [PYNQ-Z2 页面](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)上下载 PYNQ-Z2 Board File，并将其加入Vivado安装目录中的Vivado/2019.2/data/boards/board_files中
+* 在 [PYNQ-Z2 页面](https://www.tulembedded.com/FPGA/ProductsPYNQ-Z2.html)上下载 PYNQ-Z2 Board File，并将其加入Vivado安装目录中的Vivado/2020.2/data/boards/board_files中
 
 ### 3.2.2 制作PYNQ板的内存镜像
 
@@ -212,11 +212,11 @@ make BOARD=pynq
 
 ### 3.2.4 用vivado工程生成启动镜像
 
-* 确保vivado在$PATH中（可能需要source Vivado安装目录下的Vivado/2019.2/settings64.sh）
+* 确保vivado在$PATH中（可能需要source Vivado安装目录下的Vivado/2020.2/settings64.sh）
  
 * 将fpga/board/run.tcl第2行和第6行的-jobs 20修改为合适的并发数
  
-* 在NutShell-DASICS所在目录下获取 [Xilinx/device-tree-xlnx](https://github.com/Xilinx/device-tree-xlnx) 仓库，并切换到xilinx-v2019.2 tag
+* 在NutShell-DASICS所在目录下获取 [Xilinx/device-tree-xlnx](https://github.com/Xilinx/device-tree-xlnx) 仓库，并切换到xilinx-v2020.2 tag
  
 * 运行以下命令生成启动镜像：
 ```
