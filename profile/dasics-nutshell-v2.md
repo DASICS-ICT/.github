@@ -62,7 +62,15 @@ NutShell-DASICS/build/emu -i riscv-pk/build/bbl.bin
 
 ### 2.2 上板
 
-使用vivado 2020.2，按照DASICS-ICT组织主页的教程上板；唯一的不同是，不需要再单独修改Kconfig的ZYNQ_ONBOARD，在make linux kernel时使用对应的defconfig即可。
+使用vivado 2020.2，按照DASICS-ICT组织主页的教程3.2.3-3.2.5上板；唯一的不同是，不需要再单独修改Kconfig的ZYNQ_ONBOARD，在make linux kernel时使用对应的defconfig即可。
+
+```bash
+cd NutShell-DASICS
+make BOARD=pynq
+cd fpga && make PRJ=prj BOARD=pynq STANDALONE=true bootgen
+# 成功运行后，生成fpga/boot/build/prj-pynq/BOOT.BIN文件
+# 将上板用的bbl.bin更名为RV_BOOT.bin，和BOOT.BIN拷贝到SD卡的第一个分区
+```
 
 ### 备注
 
