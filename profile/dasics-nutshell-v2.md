@@ -25,7 +25,7 @@ make
 
 #### 2.1.2 编译riscv-rootfs
 
-在riscv-rootfs仓库的makefile内调整希望编译的内容，并使用make all编译。修改rootfsimg/initramfs-xxx.txt的内容可以根据自己的意愿调整根目录文件结构。
+在riscv-rootfs仓库的makefile内调整希望编译的内容，并使用`make all`编译。修改rootfsimg/initramfs-xxx.txt的内容可以根据自己的意愿调整根目录文件结构。
 
 #### 2.1.3 修改riscv-linux配置
 
@@ -40,9 +40,9 @@ make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- xxx_defconfig
 
 #### 2.1.4 编译riscv-linux与riscv-pk
 
-在riscv-pk仓库中make，在build文件夹内得到bbl.bin文件。
+在riscv-pk仓库中`make`，在build文件夹内得到bbl.bin文件。
 
-每次编译riscv-linux时会出现 multiple definition of 'yylloc' 的错误，需要修改riscv-linux/scripts/dtc/dtc-lexer.lex.c，在YYLTYPE yylloc前加上extern。
+每次编译riscv-linux时会出现 multiple definition of 'yylloc' 的错误，需要修改riscv-linux/scripts/dtc/dtc-lexer.lex.c，在`YYLTYPE yylloc`前加上`extern`。
 
 注意！仓库内默认代码为pynq上板时使用，如果仿真使用需要先参照备注进行部分代码修改！
 
@@ -54,7 +54,7 @@ make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- xxx_defconfig
 NEMU/build/riscv64-nemu-interpreter -b riscv-pk/build/bbl.bin
 ```
 
-如果进行difftest测试，则此时在NutShell-DASICS仓库内进行make emu，并使用：
+如果进行difftest测试，则此时在NutShell-DASICS仓库内进行`make emu`，并使用：
 
 ```bash
 NutShell-DASICS/build/emu -i riscv-pk/build/bbl.bin
@@ -80,6 +80,6 @@ cd fpga && make PRJ=prj BOARD=pynq STANDALONE=true bootgen
 
 dts/system.dts的include：上板为zynq-standalone.dtsi；仿真为noop.dtsi(platform.dtsi)
 
-Makefile的BBL_CONFIG --with-mem-start选项和bbl/bbl.mk.in的bbl.bin --change-addresses选项；上板为0x50000000；仿真为0x80000000
+Makefile的BBL_CONFIG `--with-mem-start`选项和bbl/bbl.mk.in的bbl.bin `--change-addresses`选项；上板为0x50000000；仿真为0x80000000
         
-在进行仿真/上板之间的切换时记得先clean再make；每次clean后编译Linux都需要进行extern yylloc的修改。
+在进行仿真/上板之间的切换时记得先`make clean`再`make`；每次`make clean`后编译Linux都需要进行`extern yylloc`的修改。
