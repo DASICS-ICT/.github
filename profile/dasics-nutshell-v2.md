@@ -12,15 +12,6 @@
 
 由于dasics-nutshell-v2的仿真使用NEMU，故与DASICS-ICT组织主页的教程有一定差异；由于测试文件放在initramfs中，所以不需要准备额外的img作为文件系统。
 
-#### 2.1.0 参照DASICS-ICT组织主页的教程设置$RISCV与$PATH等环境变量。
-```bash
-#假设你的dasics-riscv-toolchain工具链路径为$(DASICS_TOOL_CHAIN)
-export RISCV=$(DASICS_TOOL_CHAIN)/riscv64-unknown-linux-gnu
-export PATH=$(DASICS_TOOL_CHAIN)/riscv64-unknown-elf/bin:$PATH
-export PATH=$(DASICS_TOOL_CHAIN)/riscv64-unknown-linux-gnu/bin:$PATH
-export RISCV_ROOTFS_HOME=$(PATH_TO_YOUR_RISCV_ROOTFS)
-```
-
 #### 2.1.1 编译NEMU
 
 在NEMU仓库中：
