@@ -42,8 +42,6 @@ make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- xxx_defconfig
 
 在riscv-pk仓库中`make`，在build文件夹内得到bbl.bin文件。
 
-每次编译riscv-linux时会出现 multiple definition of 'yylloc' 的错误，需要修改riscv-linux/scripts/dtc/dtc-lexer.lex.c，在`YYLTYPE yylloc`前加上`extern`。
-
 注意！仓库内默认代码为pynq上板时使用，如果仿真使用需要先参照备注进行部分代码修改！
 
 #### 2.1.5 进行纯仿真或difftest仿真
@@ -82,4 +80,4 @@ dts/system.dts的include：上板为zynq-standalone.dtsi；仿真为noop.dtsi(pl
 
 Makefile的BBL_CONFIG `--with-mem-start`选项；上板为0x50000000；仿真为0x80000000
         
-在进行仿真/上板之间的切换时记得先`make clean`再`make`；每次`make clean`后编译Linux都需要进行`extern yylloc`的修改。
+在进行仿真/上板之间的切换时记得先`make clean`再`make`。
