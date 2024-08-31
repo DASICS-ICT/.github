@@ -80,6 +80,6 @@ cd fpga && make PRJ=prj BOARD=pynq STANDALONE=true bootgen
 
 dts/system.dts的include：上板为zynq-standalone.dtsi；仿真为noop.dtsi(platform.dtsi)
 
-Makefile的BBL_CONFIG `--with-mem-start`选项和bbl/bbl.mk.in的bbl.bin `--change-addresses`选项；上板为0x50000000；仿真为0x80000000
+Makefile的BBL_CONFIG `--with-mem-start`选项；上板为0x50000000；仿真为0x80000000
         
 在进行仿真/上板之间的切换时记得先`make clean`再`make`；每次`make clean`后编译Linux都需要进行`extern yylloc`的修改。
