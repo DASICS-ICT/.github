@@ -23,28 +23,16 @@ make
 # 或使用riscv64-nutshell-dasics-ref_defconfig （difftest）
 ```
 
-#### 2.1.2 编译riscv-rootfs
+#### 2.1.2 编译bbl.bin
 
-在riscv-rootfs仓库的makefile内调整希望编译的内容，并使用`make all`编译。修改rootfsimg/initramfs-xxx.txt的内容可以根据自己的意愿调整根目录文件结构。
-
-#### 2.1.3 修改riscv-linux配置
-
-在riscv-linux仓库中： 
-
+在riscv-pk仓库中：
 ```bash
-make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- xxx_defconfig
-# 仿真使用emu_defconfig，上板使用zynq_dasics_defconfig
+make BOARD=xxx
+# 仿真时BOARD=sim，上板时BOARD=pynq， 默认BOARD为sim
 ```
+该仓库将自动完成rootfs和linux和bbl的编译步骤，在build文件夹内得到bbl.bin文件。
 
-可以修改对应defconfig文件的CONFIG_INITRAMFS相关内容指向riscv-rootfs仓库内不同的initramfs-xxx.txt，以使用自定义的根目录文件结构。
-
-#### 2.1.4 编译riscv-linux与riscv-pk
-
-在riscv-pk仓库中`make`，在build文件夹内得到bbl.bin文件。
-
-注意！仓库内默认代码为pynq上板时使用，如果仿真使用需要先参照备注进行部分代码修改！
-
-#### 2.1.5 进行纯仿真或difftest仿真
+#### 2.1.3 进行纯仿真或difftest仿真
 
 如果进行单纯仿真，则此时使用：
 
@@ -57,6 +45,8 @@ NEMU/build/riscv64-nemu-interpreter -b riscv-pk/build/bbl.bin
 ```bash
 NutShell-DASICS/build/emu -i riscv-pk/build/bbl.bin
 ```
+
+可以参照verilator的使用方法，使用`--enable-fork`功能dump波形，以便仿真调试硬件的bug。
 
 ### 2.2 上板
 
@@ -72,12 +62,6 @@ cd fpga && make PRJ=prj BOARD=pynq STANDALONE=true bootgen
 
 ### 备注
 
-在nemu仿真与zynq上板之间切换时需要进行一些代码修改，如下：
+在进行仿真/上板之间的切换时，如果出现问题，可以尝试`make clean`之后再次`make`。
 
-在riscv-pk仓库内修改:
-
-dts/system.dts的include：上板为zynq-standalone.dtsi；仿真为noop.dtsi(platform.dtsi)
-
-Makefile的BBL_CONFIG `--with-mem-start`选项；上板为0x50000000；仿真为0x80000000
-        
-在进行仿真/上板之间的切换时记得先`make clean`再`make`。
+（以上内容更新于dasics-nutshell-v2.2.2）
