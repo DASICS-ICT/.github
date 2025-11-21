@@ -12,6 +12,7 @@
   * Zhao Y Y, Chen M Y, Liu Y H, et al. IMPULP: A Hardware Approach for In-Process Memory Protection via User-Level Partitioning[J]. Journal of Computer Science and Technology, 2020, 35(2): 418-432.
   * [第二届中国峰会上DASICS的报告](https://www.bilibili.com/video/BV1CG41157qu/?spm_id_from=333.337.search-card.all.click)
   * Jin Y, Xu Y B, Wang H, Zhang C Y, Huang T Y, Lu  T Y and Chen M Y, "DASICS: Efficient In-process Protection with Hardware-Assisted Dynamic Compartmentalization", The 43rd IEEE International Conference on Computer Design(ICCD),  Nov. 10-12, 2025, Dallas, USA
+  * Jin Y, Xu Y B, Yang Chengyuan, Wang H, Zhang C Y, Huang T Y, Lu  T Y and Chen M Y, " DASICS White Paper: Enhancing Memory Protection with Dynamic Compartmentalization", https://doi.org/10.48550/arXiv.2310.06435
 
 # 二、现有仓库介绍
 * 我们实现了对RISC-V架构Linux内核的修改，以支持DASICS相关安全处理机制，主要修改在如下几个仓库：
